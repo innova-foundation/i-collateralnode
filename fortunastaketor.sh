@@ -18,8 +18,8 @@ ufw default allow outgoing
 ufw default deny incoming
 ufw allow ssh/tcp
 ufw limit ssh/tcp
-ufw allow 33369/tcp
-ufw allow 9999/tcp
+ufw allow 14530/tcp
+ufw allow 14539/tcp
 ufw logging on
 ufw --force enable
 
@@ -36,22 +36,22 @@ echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 echo "Installing Dependencies"
 sudo apt-get --assume-yes install git unzip build-essential libssl-dev libdb++-dev libboost-all-dev libqrencode-dev libminiupnpc-dev libgmp-dev libevent-dev autogen automake  libtool
 
-#echo "Downloading Denarius Wallet"
-#wget https://github.com/carsenk/denarius/releases/download/v3.2.5/denariusd-v3.2.5-ubuntu1604.tar.gz
-#tar -xvf denariusd-v3.2.5-ubuntu1604.tar.gz -C /usr/local/bin
-#rm denariusd-v3.2.5-ubuntu1604.tar.gz
+#echo "Downloading Innova Wallet"
+#wget https://github.com/innova-foundation/innova/releases/
+#tar -xvf innovad-v3.2.5-ubuntu1604.tar.gz -C /usr/local/bin
+#rm innovad-v3.2.5-ubuntu1604.tar.gz
 
-echo "Installing Denarius Wallet"
-git clone https://github.com/carsenk/denarius
-cd denarius
+echo "Installing Innova Wallet"
+git clone https://github.com/innova-foundation/innova
+cd innova
 git checkout master
 git pull
 cd src
 make -f makefile.unix
-mv ~/denarius/src/denariusd /usr/local/bin/denariusd
+mv ~/innova/src/innovad /usr/local/bin/innovad
 
-echo "Populate denarius.conf"
-mkdir ~/.denarius
+echo "Populate innova.conf"
+mkdir ~/.innova
     # Get VPS IP Address
     #VPSIP=$(curl ipinfo.io/ip)
     # create rpc user and password
@@ -60,39 +60,39 @@ mkdir ~/.denarius
     rpcpassword=$(openssl rand -base64 48)
     echo -n "What is your fortunastakeprivkey? (Hint:genkey output)"
     read FORTUNASTAKEPRIVKEY
-    #echo -e "nativetor=1\nrpcuser=$rpcuser\nrpcpassword=$rpcpassword\nserver=1\nlisten=1\ndaemon=1\nport=9999\naddnode=denarius.host\naddnode=denarius.win\naddnode=denarius.pro\naddnode=triforce.black\nrpcallowip=127.0.0.1\nexternalip=$VPSIP:9999\nfortunastake=1\nfortunastakeprivkey=$FORTUNASTAKEPRIVKEY" > ~/.denarius/denarius.conf
-	echo -e "nativetor=1\nrpcuser=$rpcuser\nrpcpassword=$rpcpassword\nserver=1\nlisten=1\ndaemon=1\nport=9999\naddnode=denarius.host\naddnode=denarius.win\naddnode=denarius.pro\naddnode=triforce.black\nrpcallowip=127.0.0.1\nfortunastake=1\nfortunastakeprivkey=$FORTUNASTAKEPRIVKEY" > ~/.denarius/denarius.conf
+    #echo -e "nativetor=1\nrpcuser=$rpcuser\nrpcpassword=$rpcpassword\nserver=1\nlisten=1\ndaemon=1\nport=14539\naddnode=innova.host\naddnode=innova.win\naddnode=innova.pro\naddnode=triforce.black\nrpcallowip=127.0.0.1\nexternalip=$VPSIP:14539\nfortunastake=1\nfortunastakeprivkey=$FORTUNASTAKEPRIVKEY" > ~/.innova/innova.conf
+	echo -e "nativetor=1\nrpcuser=$rpcuser\nrpcpassword=$rpcpassword\nserver=1\nlisten=1\ndaemon=1\nport=14539\naddnode=innova.host\naddnode=innova.win\naddnode=innova.pro\naddnode=triforce.black\nrpcallowip=127.0.0.1\nfortunastake=1\nfortunastakeprivkey=$FORTUNASTAKEPRIVKEY" > ~/.innova/innova.conf
 
 
-echo "Get Chaindata"
-sudo apt-get -y install unzip
-cd ~/.denarius
-rm -rf database txleveldb smsgDB
+#echo "Get Chaindata"
+#sudo apt-get -y install unzip
+#cd ~/.innova
+#rm -rf database txleveldb smsgDB
 #wget http://d.hashbag.cc/chaindata.zip
 #unzip chaindata.zip
-wget https://github.com/carsenk/denarius/releases/download/v3.3.6/chaindata1612994.zip
-unzip chaindata1612994.zip
+#wget https://github.com/innova-foundation/innova/releases/download/v3.3.6/chaindata1612994.zip
+#unzip chaindata1612994.zip
 
 echo "Add Daemon Cronjob"
-(crontab -l ; echo "@reboot /usr/local/bin/denariusd")| crontab -
-#(crontab -l ; echo "0 * * * * /usr/local/bin/denariusd stop")| crontab -
-#(crontab -l ; echo "2 * * * * /usr/local/bin/denariusd")| crontab -
+(crontab -l ; echo "@reboot /usr/local/bin/innovad")| crontab -
+#(crontab -l ; echo "0 * * * * /usr/local/bin/innovad stop")| crontab -
+#(crontab -l ; echo "2 * * * * /usr/local/bin/innovad")| crontab -
 
-echo "Starting Denarius Daemon to get Onion Address and quick 120 second sync"
-denariusd
+echo "Starting Innova Daemon to get Onion Address and quick 120 second sync"
+innovad
 sleep 120
 
-echo "Stopping Denarius Daemon to put Onion Address into denarius.conf"
-denariusd stop
+echo "Stopping Innova Daemon to put Onion Address into innova.conf"
+innovad stop
 sleep 30
 
-ONIONADDRESS=$(head -1 ~/.denarius/onion/hostname)
-echo "externalip=$ONIONADDRESS:9999" >> ~/.denarius/denarius.conf
+ONIONADDRESS=$(head -1 ~/.innova/onion/hostname)
+echo "externalip=$ONIONADDRESS:14539" >> ~/.innova/innova.conf
 
-echo "Starting Denarius Daemon"
-denariusd
+echo "Starting Innova Daemon"
+innovad
 echo "fortunastake TOR address -> $ONIONADDRESS"
 sleep 30
 
 echo "Watch getinfo for block sync"
-watch -n 10 'denariusd getinfo'
+watch -n 10 'innovad getinfo'

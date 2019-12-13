@@ -1,15 +1,15 @@
 #!/bin/bash
 
-echo "Stop denariusd"
-denariusd stop
+echo "Stop innovad"
+innovad stop
 
-cd denarius
+cd innova
 git checkout master
 git pull
 cd src
 make -f makefile.unix
-mv ~/denarius/src/denariusd /usr/local/bin/denariusd
+mv ~/innova/src/innovad /usr/local/bin/innovad
 
-echo "Start denariusd"
-denariusd
-watch -n 10 'denariusd getinfo'
+echo "Start innovad"
+innovad
+watch -n 10 'innovad getinfo'
