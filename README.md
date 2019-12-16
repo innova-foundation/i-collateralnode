@@ -1,4 +1,4 @@
-![FortunaStake](https://i.imgur.com/ZO4lDWT.png)
+![FortunaStake](https://i.imgur.com/QQs9XNF.png)
 # Innova FortunaStake
 
 Menu version. Choose Ubuntu 16.04, Ubuntu 18.04, or update to latest daemon.  
