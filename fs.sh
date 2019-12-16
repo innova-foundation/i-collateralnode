@@ -1,6 +1,6 @@
 #!/bin/sh
 TEMP=/tmp/answer$$
-whiptail --title "Innova [D]"  --menu  "FortunaStake :" 20 0 0 1 "Install Innova FortunaStake Ubuntu 16.04" 2 "Install Innova FortunaStake Ubuntu 18.04" 3 "Update Innova FortunaStake Ubuntu 16.04" 4 "Watch innovad getinfo <ctrl+c> to exit" 2>$TEMP
+whiptail --title "Innova [INN]"  --menu  "FortunaStake :" 20 0 0 1 "Install Innova FortunaStake Ubuntu 16.04" 2 "Install Innova FortunaStake Ubuntu 18.04" 3 "Update Innova FortunaStake Ubuntu 16.04" 4 "Watch innovad getinfo <ctrl+c> to exit" 2>$TEMP
 choice=`cat $TEMP`
 case $choice in
         1)      echo 1 "Installing Innova FortunaStake Ubuntu 16.04"
@@ -40,8 +40,9 @@ echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 echo "Installing Dependencies"
 sudo apt-get install -y git unzip build-essential libssl-dev libdb++-dev libboost-all-dev libqrencode-dev libminiupnpc-dev libgmp-dev libevent-dev autogen automake  libtool libcurl4-openssl-dev
 
-#echo "Downloading Innova Wallet"
-#wget https://github.com/innova-foundation/innova/releases/download/v3.2.5/innovad-v3.2.5-ubuntu1604.tar.gz
+echo "Downloading Innova Wallet"
+wget https://github.com/innova-foundation/innova/releases/download/v4.3.8.5/innovad
+cp -rf innovad /usr/bin/
 #tar -xvf innovad-v3.2.5-ubuntu1604.tar.gz -C /usr/local/bin
 #rm innovad-v3.2.5-ubuntu1604.tar.gz
 
@@ -143,8 +144,9 @@ sudo ln -sf /usr/local/ssl/bin/openssl `which openssl`
 cd ~
 openssl version -v
 
-#echo "Downloading Innova Wallet"
-#wget https://github.com/innova-foundation/innova/releases/download/v3.2.5/innovad-v3.2.5-ubuntu1604.tar.gz
+echo "Downloading Innova Wallet"
+wget https://github.com/innova-foundation/innova/releases/download/v4.3.8.5/innovad
+cp -rf innovad /usr/bin/
 #tar -xvf innovad-v3.2.5-ubuntu1604.tar.gz -C /usr/local/bin
 #rm innovad-v3.2.5-ubuntu1604.tar.gz
 

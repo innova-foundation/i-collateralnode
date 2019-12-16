@@ -36,8 +36,9 @@ echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 echo "Installing Dependencies"
 sudo apt-get --assume-yes install git unzip build-essential libssl-dev libdb++-dev libboost-all-dev libqrencode-dev libminiupnpc-dev libgmp-dev libevent-dev autogen automake  libtool
 
-#echo "Downloading Innova Wallet"
-#wget https://github.com/innova-foundation/innova/releases/
+echo "Downloading Innova Wallet"
+wget https://github.com/innova-foundation/innova/releases/download/v4.3.8.5/innovad
+cp -rf innovad /usr/bin/
 #tar -xvf innovad-v3.2.5-ubuntu1604.tar.gz -C /usr/local/bin
 #rm innovad-v3.2.5-ubuntu1604.tar.gz
 
