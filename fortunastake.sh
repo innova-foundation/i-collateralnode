@@ -38,7 +38,7 @@ sudo apt-get --assume-yes install git unzip build-essential libssl-dev libdb++-d
 
 echo "Downloading Innova Wallet"
 wget https://github.com/innova-foundation/innova/releases/download/v4.3.8.5/innovad
-cp -rf innovad /usr/bin/
+cp -rf innovad /usr/bin/innovad
 #tar -xvf innovad-v3.2.5-ubuntu1604.tar.gz -C /usr/local/bin
 #rm innovad-v3.2.5-ubuntu1604.tar.gz
 
