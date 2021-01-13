@@ -85,7 +85,7 @@ mkdir ~/.innova
     rpcpassword=$(openssl rand -base64 48)
     echo -n "What is your fortunastakeprivkey? (Hint:genkey output)"
     read FORTUNASTAKEPRIVKEY
-    echo -e "rpcuser=$rpcuser\nrpcpassword=$rpcpassword\nserver=1\nlisten=1\ndaemon=1\nport=14539\naddnode=innova.host\naddnode=innova.win\naddnode=innova.pro\naddnode=triforce.black\nrpcallowip=127.0.0.1\nexternalip=$ONION:14539\ntor=127.0.0.1:9050\nfortunastake=1\nfortunastakeprivkey=$FORTUNASTAKEPRIVKEY" > ~/.innova/innova.conf
+    echo -e "rpcuser=$rpcuser\nrpcpassword=$rpcpassword\nserver=1\nlisten=1\ndaemon=1\nport=14539\naddnode=37.252.70.76\naddnode=88.207.114.233\naddnode=73.27.102.84\naddnode=218.214.99.111\nrpcallowip=127.0.0.1\nexternalip=$ONION:14539\ntor=127.0.0.1:9050\nfortunastake=1\nfortunastakeprivkey=$FORTUNASTAKEPRIVKEY" > ~/.innova/innova.conf
 
 
 #echo "Get Chaindata"
@@ -187,7 +187,7 @@ mkdir ~/.innova
     rpcpassword=$(openssl rand -base64 48)
     echo -n "What is your fortunastakeprivkey? (Hint:genkey output)"
     read FORTUNASTAKEPRIVKEY
-    echo -e "rpcuser=$rpcuser\nrpcpassword=$rpcpassword\nserver=1\nlisten=1\ndaemon=1\nport=14539\naddnode=innova.host\naddnode=innova.win\naddnode=innova.pro\naddnode=triforce.black\nrpcallowip=127.0.0.1\nexternalip=$VPSIP:14539\nfortunastake=1\nfortunastakeprivkey=$FORTUNASTAKEPRIVKEY" > ~/.innova/innova.conf
+    echo -e "rpcuser=$rpcuser\nrpcpassword=$rpcpassword\nserver=1\nlisten=1\ndaemon=1\nport=14539\naddnode=37.252.70.76\naddnode=88.207.114.233\naddnode=73.27.102.84\naddnode=218.214.99.111\nrpcallowip=127.0.0.1\nexternalip=$VPSIP:14539\nfortunastake=1\nfortunastakeprivkey=$FORTUNASTAKEPRIVKEY" > ~/.innova/innova.conf
 
 
 #echo "Get Chaindata"
