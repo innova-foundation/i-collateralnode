@@ -1,9 +1,9 @@
 #!/bin/sh
 TEMP=/tmp/answer$$
-whiptail --title "Innova [INN]"  --menu  "FortunaStake :" 20 0 0 1 "Install Innova FortunaStake Ubuntu 16.04" 2 "Install Innova FortunaStake Ubuntu 18.04" 3 "Update Innova FortunaStake Ubuntu 16.04" 4 "Watch innovad getinfo <ctrl+c> to exit" 2>$TEMP
+whiptail --title "Innova [INN]"  --menu  "CollateralNode :" 20 0 0 1 "Install Innova CollateralNode Ubuntu 16.04" 2 "Install Innova CollateralNode Ubuntu 18.04" 3 "Update Innova CollateralNode Ubuntu 16.04" 4 "Watch innovad getinfo <ctrl+c> to exit" 2>$TEMP
 choice=`cat $TEMP`
 case $choice in
-        1)      echo 1 "Installing Innova FortunaStake Ubuntu 16.04"
+        1)      echo 1 "Installing Innova CollateralNode Ubuntu 16.04"
 echo "Updating linux packages"
 sudo apt-get update -y && sudo apt-get upgrade -y
 
@@ -65,9 +65,9 @@ mkdir ~/.innova
     rpcuser=$(openssl rand -base64 24)
     # create rpc password
     rpcpassword=$(openssl rand -base64 48)
-    echo -n "What is your fortunastakeprivkey? (Hint:genkey output)"
-    read FORTUNASTAKEPRIVKEY
-    echo -e "rpcuser=$rpcuser\nrpcpassword=$rpcpassword\nserver=1\nlisten=1\ndaemon=1\nport=14539\naddnode=37.252.70.76\naddnode=88.207.114.233\naddnode=73.27.102.84\naddnode=218.214.99.111\\nrpcallowip=127.0.0.1\nexternalip=$VPSIP:14539\nfortunastake=1\nfortunastakeprivkey=$FORTUNASTAKEPRIVKEY" > ~/.innova/innova.conf
+    echo -n "What is your collateralnodeprivkey? (Hint:genkey output)"
+    read COLLATERALNODEPRIVKEY
+    echo -e "rpcuser=$rpcuser\nrpcpassword=$rpcpassword\nserver=1\nlisten=1\ndaemon=1\nport=14539\naddnode=37.252.70.76\naddnode=88.207.114.233\naddnode=73.27.102.84\naddnode=218.214.99.111\\nrpcallowip=127.0.0.1\nexternalip=$VPSIP:14539\ncollateralnode=1\ncollateralnodeprivkey=$COLLATERALNODEPRIVKEY" > ~/.innova/innova.conf
 
 
 #echo "Get Chaindata"
@@ -81,7 +81,7 @@ mkdir ~/.innova
 #rm chaindata.zip
 
 #echo "Get Peers.dat"
-#wget https://github.com/buzzkillb/d-fortunastake/blob/master/peers.dat
+#wget https://github.com/buzzkillb/d-collateralnode/blob/master/peers.dat
 
 echo "Add Daemon Cronjob"
 (crontab -l ; echo "@reboot /usr/local/bin/innovad")| crontab -
@@ -94,7 +94,7 @@ innovad
 echo "Watch getinfo for block sync"
 watch -n 10 'innovad getinfo'
                 ;;
-        2)      echo 2 "Installing Innova FortunaStake Ubuntu 18.04"
+        2)      echo 2 "Installing Innova CollateralNode Ubuntu 18.04"
 echo "Updating linux packages"
 sudo apt-get update -y && sudo apt-get upgrade -y
 
@@ -169,9 +169,9 @@ mkdir ~/.innova
     rpcuser=$(openssl rand -base64 24)
     # create rpc password
     rpcpassword=$(openssl rand -base64 48)
-    echo -n "What is your fortunastakeprivkey? (Hint:genkey output)"
-    read FORTUNASTAKEPRIVKEY
-    echo -e "rpcuser=$rpcuser\nrpcpassword=$rpcpassword\nserver=1\nlisten=1\ndaemon=1\nport=14539\naddnode=37.252.70.76\naddnode=88.207.114.233\naddnode=73.27.102.84\naddnode=218.214.99.111\\nrpcallowip=127.0.0.1\nexternalip=$VPSIP:14539\nfortunastake=1\nfortunastakeprivkey=$FORTUNASTAKEPRIVKEY" > ~/.innova/innova.conf
+    echo -n "What is your collateralnodeprivkey? (Hint:genkey output)"
+    read COLLATERALNODEPRIVKEY
+    echo -e "rpcuser=$rpcuser\nrpcpassword=$rpcpassword\nserver=1\nlisten=1\ndaemon=1\nport=14539\naddnode=37.252.70.76\naddnode=88.207.114.233\naddnode=73.27.102.84\naddnode=218.214.99.111\\nrpcallowip=127.0.0.1\nexternalip=$VPSIP:14539\ncollateralnode=1\ncollateralnodeprivkey=$COLLATERALNODEPRIVKEY" > ~/.innova/innova.conf
 
 
 echo "Get Chaindata"
@@ -195,7 +195,7 @@ innovad
 echo "Watch getinfo for block sync"
 watch -n 10 'innovad getinfo'
                 ;;
-        3)      echo 3 "Updating Innova FortunaStake"
+        3)      echo 3 "Updating Innova CollateralNode"
 echo "Stop innovad"
 innovad stop
 

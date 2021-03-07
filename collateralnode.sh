@@ -39,8 +39,6 @@ sudo apt-get --assume-yes install git unzip build-essential libssl-dev libdb++-d
 echo "Downloading Innova Wallet"
 wget https://github.com/innova-foundation/innova/releases/download/v4.3.8.5/innovad
 cp -rf innovad /usr/bin/innovad
-#tar -xvf innovad-v3.2.5-ubuntu1604.tar.gz -C /usr/local/bin
-#rm innovad-v3.2.5-ubuntu1604.tar.gz
 
 echo "Installing Innova Wallet"
 git clone https://github.com/innova-foundation/innova
@@ -54,15 +52,14 @@ mv ~/innova/src/innovad /usr/local/bin/innovad
 echo "Populate innova.conf"
 mkdir ~/.innova
     # Get VPS IP Address
-    #VPSIP=$(curl ipinfo.io/ip)
+    VPSIP=$(curl ipinfo.io/ip)
     # create rpc user and password
     rpcuser=$(openssl rand -base64 24)
     # create rpc password
     rpcpassword=$(openssl rand -base64 48)
-    echo -n "What is your fortunastakeprivkey? (Hint:genkey output)"
-    read FORTUNASTAKEPRIVKEY
-    #echo -e "nativetor=1\nrpcuser=$rpcuser\nrpcpassword=$rpcpassword\nserver=1\nlisten=1\ndaemon=1\nport=14539\naddnode=innova.host\naddnode=innova.win\naddnode=innova.pro\naddnode=triforce.black\nrpcallowip=127.0.0.1\nexternalip=$VPSIP:14539\nfortunastake=1\nfortunastakeprivkey=$FORTUNASTAKEPRIVKEY" > ~/.innova/innova.conf
-	echo -e "nativetor=1\nrpcuser=$rpcuser\nrpcpassword=$rpcpassword\nserver=1\nlisten=1\ndaemon=1\nport=14539\naddnode=37.252.70.76\naddnode=88.207.114.233\naddnode=73.27.102.84\naddnode=218.214.99.111\nrpcallowip=127.0.0.1\nfortunastake=1\nfortunastakeprivkey=$FORTUNASTAKEPRIVKEY" > ~/.innova/innova.conf
+    echo -n "What is your collateralnodeprivkey? (Hint:genkey output)"
+    read COLLATERALNODEPRIVKEY
+    echo -e "rpcuser=$rpcuser\nrpcpassword=$rpcpassword\nserver=1\nlisten=1\ndaemon=1\nport=14539\naddnode=37.252.70.76\naddnode=88.207.114.233\naddnode=73.27.102.84\naddnode=218.214.99.111\nrpcallowip=127.0.0.1\nexternalip=$VPSIP:14539\ncollateralnode=1\ncollateralnodeprivkey=$COLLATERALNODEPRIVKEY" > ~/.innova/innova.conf
 
 
 #echo "Get Chaindata"
@@ -79,21 +76,8 @@ echo "Add Daemon Cronjob"
 #(crontab -l ; echo "0 * * * * /usr/local/bin/innovad stop")| crontab -
 #(crontab -l ; echo "2 * * * * /usr/local/bin/innovad")| crontab -
 
-echo "Starting Innova Daemon to get Onion Address and quick 120 second sync"
-innovad
-sleep 120
-
-echo "Stopping Innova Daemon to put Onion Address into innova.conf"
-innovad stop
-sleep 30
-
-ONIONADDRESS=$(head -1 ~/.innova/onion/hostname)
-echo "externalip=$ONIONADDRESS:14539" >> ~/.innova/innova.conf
-
 echo "Starting Innova Daemon"
 innovad
-echo "fortunastake TOR address -> $ONIONADDRESS"
-sleep 30
 
 echo "Watch getinfo for block sync"
 watch -n 10 'innovad getinfo'
