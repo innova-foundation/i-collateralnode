@@ -18,8 +18,8 @@ sudo apt install fail2ban -y
 
 echo "Installing Firewall"
 sudo apt install ufw -y
-sudo ufw default allow outgoing
 sudo ufw default deny incoming
+sudo ufw default allow outgoing
 sudo ufw allow ssh/tcp
 sudo ufw limit ssh/tcp
 sudo ufw allow 14530/tcp
@@ -109,8 +109,8 @@ sudo apt install fail2ban -y
 
 echo "Installing Firewall"
 sudo apt install ufw -y
-sudo ufw default allow outgoing
 sudo ufw default deny incoming
+sudo ufw default allow outgoing
 sudo ufw allow ssh/tcp
 sudo ufw limit ssh/tcp
 sudo ufw allow 14530/tcp
@@ -133,7 +133,7 @@ sudo apt-get install -y git unzip build-essential libdb++-dev libboost-all-dev l
 
 echo "Downgrade libssl-dev"
 sudo apt-get install make
-wget https://www.openssl.org/source/openssl-1.0.1j.tar.gz
+wget https://ftp.openssl.org/source/old/1.0.1/openssl-1.0.1j.tar.gz
 tar -xzvf openssl-1.0.1j.tar.gz
 cd openssl-1.0.1j
 ./config
