@@ -41,7 +41,7 @@ echo "Installing Dependencies"
 sudo apt-get install -y git unzip build-essential libssl-dev libdb++-dev libboost-all-dev libqrencode-dev libminiupnpc-dev libgmp-dev libevent-dev autogen automake  libtool libcurl4-openssl-dev
 
 echo "Downloading Innova Wallet"
-wget https://github.com/innova-foundation/innova/releases/download/v4.3.8.5/innovad
+wget https://github.com/innova-foundation/innova/releases/download/v4.3.8.9/innovad
 cp -rf innovad /usr/bin/innovad
 #tar -xvf innovad-v3.2.5-ubuntu1604.tar.gz -C /usr/local/bin
 #rm innovad-v3.2.5-ubuntu1604.tar.gz
@@ -67,21 +67,16 @@ mkdir ~/.innova
     rpcpassword=$(openssl rand -base64 48)
     echo -n "What is your collateralnodeprivkey? (Hint:genkey output)"
     read COLLATERALNODEPRIVKEY
-    echo -e "rpcuser=$rpcuser\nrpcpassword=$rpcpassword\nserver=1\nlisten=1\ndaemon=1\nport=14539\naddnode=37.252.70.76\naddnode=88.207.114.233\naddnode=73.27.102.84\naddnode=218.214.99.111\\nrpcallowip=127.0.0.1\nexternalip=$VPSIP:14539\ncollateralnode=1\ncollateralnodeprivkey=$COLLATERALNODEPRIVKEY" > ~/.innova/innova.conf
+    echo -e "rpcuser=$rpcuser\nrpcpassword=$rpcpassword\nserver=1\nlisten=1\ndaemon=1\nport=14539\naddnode=innseeder.circuitbreaker.online\naddnodeinnseeder.circuitbreaker.dev\naddnode=innseeder.innovai.cloud\nrpcallowip=127.0.0.1\nexternalip=$VPSIP:14539\ncollateralnode=1\ncollateralnodeprivkey=$COLLATERALNODEPRIVKEY" > ~/.innova/innova.conf
 
 
 #echo "Get Chaindata"
 #sudo apt-get -y install unzip
 #cd ~/.innova
 #rm -rf database txleveldb smsgDB
-#wget http://d.hashbag.cc/chaindata.zip
-#unzip chaindata.zip
-#wget https://pos.watch/chaindata.zip
-#unzip chaindata.zip
-#rm chaindata.zip
-
-#echo "Get Peers.dat"
-#wget https://github.com/buzzkillb/d-collateralnode/blob/master/peers.dat
+#wget https://github.com/innova-foundation/innova/releases/download/v4.3.8.8/innovabootstrap.zip
+#unzip innovabootstrap.zip
+#rm innovabootstrap.zip
 
 echo "Add Daemon Cronjob"
 (crontab -l ; echo "@reboot /usr/local/bin/innovad")| crontab -
@@ -145,7 +140,7 @@ cd ~
 openssl version -v
 
 echo "Downloading Innova Wallet"
-wget https://github.com/innova-foundation/innova/releases/download/v4.3.8.5/innovad
+wget https://github.com/innova-foundation/innova/releases/download/v4.3.8.9/innovad
 cp -rf innovad /usr/bin/innovad
 #tar -xvf innovad-v3.2.5-ubuntu1604.tar.gz -C /usr/local/bin
 #rm innovad-v3.2.5-ubuntu1604.tar.gz
@@ -171,18 +166,16 @@ mkdir ~/.innova
     rpcpassword=$(openssl rand -base64 48)
     echo -n "What is your collateralnodeprivkey? (Hint:genkey output)"
     read COLLATERALNODEPRIVKEY
-    echo -e "rpcuser=$rpcuser\nrpcpassword=$rpcpassword\nserver=1\nlisten=1\ndaemon=1\nport=14539\naddnode=37.252.70.76\naddnode=88.207.114.233\naddnode=73.27.102.84\naddnode=218.214.99.111\\nrpcallowip=127.0.0.1\nexternalip=$VPSIP:14539\ncollateralnode=1\ncollateralnodeprivkey=$COLLATERALNODEPRIVKEY" > ~/.innova/innova.conf
+    echo -e "rpcuser=$rpcuser\nrpcpassword=$rpcpassword\nserver=1\nlisten=1\ndaemon=1\nport=14539\naddnode=innseeder.circuitbreaker.online\naddnodeinnseeder.circuitbreaker.dev\naddnode=innseeder.innovai.cloud\nrpcallowip=127.0.0.1\nexternalip=$VPSIP:14539\ncollateralnode=1\ncollateralnodeprivkey=$COLLATERALNODEPRIVKEY" > ~/.innova/innova.conf
 
 
 echo "Get Chaindata"
 sudo apt-get -y install unzip
 cd ~/.innova
 rm -rf database txleveldb smsgDB
-#wget http://d.hashbag.cc/chaindata.zip
-#unzip chaindata.zip
-wget https://pos.watch/chaindata.zip
-unzip chaindata.zip
-rm chaindata.zip
+wget wget https://github.com/innova-foundation/innova/releases/download/v4.3.8.8/innovabootstrap.zip
+unzip innovabootstrap.zip
+rm innovabootstrap.zip
 
 echo "Add Daemon Cronjob"
 (crontab -l ; echo "@reboot /usr/local/bin/innovad")| crontab -
